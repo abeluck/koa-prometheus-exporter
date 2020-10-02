@@ -126,7 +126,7 @@ test('Should track HTTP metrics as a Prometheus histogram', async () => {
         next
     );
     const metricsToExist = {
-        http_server_requests_seconds: prometheus.client.Histogram,
+        http_request_duration_seconds: prometheus.client.Histogram,
         http_request_size_bytes: prometheus.client.Summary,
         http_response_size_bytes: prometheus.client.Summary,
         http_requests_total: prometheus.client.Counter,
@@ -136,7 +136,7 @@ test('Should track HTTP metrics as a Prometheus histogram', async () => {
         const metrics = Object.keys(metric.hashMap);
         expect(metric).toBeInstanceOf(metricsToExist[k]);
         expect(metrics.length).toBe(1);
-        expect(metrics[0]).toBe('code:200,method:get,uri:/test');
+        expect(metrics[0]).toBe('method:get,path:/test,status_code:200');
     });
 });
 
@@ -167,7 +167,7 @@ test('Should track HTTP metrics as a Prometheus histogram and transform the URI'
         next
     );
     const metricsToExist = {
-        http_server_requests_seconds: prometheus.client.Histogram,
+        http_request_duration_seconds: prometheus.client.Histogram,
         http_request_size_bytes: prometheus.client.Summary,
         http_response_size_bytes: prometheus.client.Summary,
         http_requests_total: prometheus.client.Counter,
@@ -177,6 +177,6 @@ test('Should track HTTP metrics as a Prometheus histogram and transform the URI'
         const metrics = Object.keys(metric.hashMap);
         expect(metric).toBeInstanceOf(metricsToExist[k]);
         expect(metrics.length).toBe(1);
-        expect(metrics[0]).toBe('code:200,method:get,uri:/test');
+        expect(metrics[0]).toBe('method:get,path:/test,status_code:200');
     });
 });
