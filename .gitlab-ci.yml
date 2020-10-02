@@ -1,0 +1,28 @@
+---
+image: node:lts-buster-slim
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - test
+  - release
+
+before_script:
+  - apt-get update && apt-get install -y make
+
+test:
+  stage: test
+  script:
+    - make test
+  artifacts:
+    paths:
+      - coverage/
+
+release:
+  stage: release
+  only:
+    - master
+  script:
+    - make publish
