@@ -7,7 +7,7 @@ module.exports = {
     rules: {
         'arrow-body-style': 0,
         'arrow-parens': ['error', 'as-needed'],
-        'max-len': ['error', 100],
+        'max-len': ['error', 120],
         'no-restricted-syntax': 'off',
         'func-names': 'off',
         'no-continue': 'off',

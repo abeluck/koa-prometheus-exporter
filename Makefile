@@ -1,30 +1,21 @@
-ARGS ?= ""
+.PHONY: fmt test npm
 
-.PHONY: build test default coverage
+fmt:
+	npm run fmt
 
-default: .git/hooks/pre-commit build
+.npmrc:
+	echo '@guardianproject-ops:registry=https://gitlab.com/api/v4/packages/npm/' > .npmrc
+	echo '//gitlab.com/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}' >> .npmrc
+	echo '//gitlab.com/api/v4/projects/:_authToken=${CI_JOB_TOKEN}' >> .npmrc
+	echo '//gitlab.com/api/v4/projects/21522148/packages/npm/:_authToken=${CI_JOB_TOKEN}' >> .npmrc
 
-build:
-	docker-compose build
+npm:
 	npm install
 
-.git/hooks/pre-commit: scripts/prettier.sh
-	cp scripts/prettier.sh .git/hooks/pre-commit
+test: npm
+	npm test
+	npm run lint
 
-run:
-	docker-compose up
+publish: test .npmrc
+	npm run publish
 
-test:
-	docker-compose run --rm -e DEBUG='' koa-prometheus-exporter npm test -- $(ARGS)
-
-lint:
-	docker-compose run --rm koa-prometheus-exporter yarn lint
-
-format:
-	docker-compose run --rm koa-prometheus-exporter yarn format
-
-shell:
-	docker-compose run --rm koa-prometheus-exporter bash
-
-coverage:
-	open coverage/lcov-report/index.html
