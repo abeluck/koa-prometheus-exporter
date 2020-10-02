@@ -30,7 +30,7 @@ function prometheusMetricsExporterWrapper(options = {}) {
                 debug('GET /%s', path);
                 if (
                     !headerBlacklist ||
-                    headerBlacklist.filter(h => {
+                    headerBlacklist.filter((h) => {
                         return Object.keys(ctx.headers).includes(h);
                     }).length === 0
                 ) {
@@ -50,8 +50,8 @@ function prometheusMetricsExporterWrapper(options = {}) {
 
 function httpMetricMiddlewareWrapper(options = {}) {
     // setup metrics.
-  const labelNames = ['method', 'path', 'status_code'];
-  const httpRequestsTotal = new client.Counter({
+    const labelNames = ['method', 'path', 'status_code'];
+    const httpRequestsTotal = new client.Counter({
         labelNames,
         name: 'http_requests_total',
         help: 'Total number of HTTP requests',
@@ -79,7 +79,7 @@ function httpMetricMiddlewareWrapper(options = {}) {
         help: 'Duration of HTTP response size in bytes',
     });
 
-    let pathTransformFunction = path => {
+    let pathTransformFunction = (path) => {
         return path;
     };
     if (options.pathTransform) {

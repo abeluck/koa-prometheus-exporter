@@ -131,7 +131,7 @@ test('Should track HTTP metrics as a Prometheus histogram', async () => {
         http_response_size_bytes: prometheus.client.Summary,
         http_requests_total: prometheus.client.Counter,
     };
-    Object.keys(metricsToExist).forEach(k => {
+    Object.keys(metricsToExist).forEach((k) => {
         const metric = prometheus.client.register.getSingleMetric(k);
         const metrics = Object.keys(metric.hashMap);
         expect(metric).toBeInstanceOf(metricsToExist[k]);
@@ -144,7 +144,7 @@ test('Should track HTTP metrics as a Prometheus histogram and transform the URI'
     const next = jest.fn();
     const path = '/test/1234/get';
     await prometheus.httpMetricMiddleware({
-        pathTransform: p => {
+        pathTransform: (p) => {
             if (p && p.includes('/')) {
                 return `/${p.split('/')[1]}`;
             }
@@ -172,7 +172,7 @@ test('Should track HTTP metrics as a Prometheus histogram and transform the URI'
         http_response_size_bytes: prometheus.client.Summary,
         http_requests_total: prometheus.client.Counter,
     };
-    Object.keys(metricsToExist).forEach(k => {
+    Object.keys(metricsToExist).forEach((k) => {
         const metric = prometheus.client.register.getSingleMetric(k);
         const metrics = Object.keys(metric.hashMap);
         expect(metric).toBeInstanceOf(metricsToExist[k]);
