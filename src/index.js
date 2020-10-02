@@ -1,6 +1,5 @@
 const client = require('prom-client');
 const debug = require('debug')('prometheus:middleware');
-require('prometheus-gc-stats')(client.register)();
 
 client.collectDefaultMetrics();
 

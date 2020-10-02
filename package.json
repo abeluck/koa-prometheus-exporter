@@ -1,16 +1,31 @@
 {
-  "name": "@echo-health/koa-prometheus-exporter",
-  "version": "1.0.4",
+  "name": "@guardianproject-ops/koa-prometheus-exporter",
+  "version": "2.0.0",
   "main": "src/index.js",
   "license": "MIT",
   "engines": {
     "node": ">=8.11.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/guardianproject-ops/koa-prometheus-exporter.git"
+  },
+  "author": "Abel Luck <abel@guardianproject.info>",
+  "contributors": [
+    {
+      "name": "Ryan McGrath",
+      "email": "ryan.mcgrath@echo.co.uk"
+    },
+    {
+      "name": "Abel Luck",
+      "email": "abel@guardianproject.info"
+    }
+  ],
   "scripts": {
     "test": "jest --env node",
     "lint": "eslint .",
-    "format": "prettier --write 'src/**/*.js'",
-    "format:check": "prettier --list-different 'src/**/*.js'"
+    "fmt": "prettier --write 'src/**/*.js'",
+    "fmt:check": "prettier --list-different 'src/**/*.js'"
   },
   "jest": {
     "collectCoverage": true,
@@ -29,27 +44,15 @@
     "tabWidth": 4
   },
   "dependencies": {
-    "debug": "^3.1.0",
-    "prom-client": "^10.2.3",
-    "prometheus-gc-stats": "^0.5.1"
+    "debug": "^4.2.0",
+    "prom-client": "^12.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.7.1",
-    "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-config-prettier": "^2.5.0",
-    "eslint-plugin-import": "^2.7.0",
-    "jest": "^24.8.0",
-    "prettier": "^1.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:echo-health/koa-prometheus-exporter.git"
-  },
-  "author": "Echo",
-  "contributors": [
-    {
-      "name": "Ryan McGrath",
-      "email": "ryan.mcgrath@echo.co.uk"
-    }
-  ]
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2"
+  }
 }
